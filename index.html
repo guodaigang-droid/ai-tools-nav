@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI工具箱 - 发现最好用的AI工具 | AI Tool Navigation</title>
+<meta name="description" content="AI工具箱收录了200+最新AI工具，涵盖聊天对话、图像生成、视频制作、写作助手、编程开发等分类。帮你找到最适合的AI工具。">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f9fb;--surface:#fff;--border:#e5e7eb;--text:#1a1a2e;--text2:#6b7280;
+  --primary:#6366f1;--primary-hover:#4f46e5;--accent:#f0f0ff;--radius:8px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08);
+}
+.dark{--bg:#0f0f1a;--surface:#1a1a2e;--border:#2a2a3e;--text:#e5e7eb;--text2:#9ca3af;--accent:#1e1b4b;--shadow:0 1px 3px rgba(0,0,0,.3);--shadow-md:0 4px 12px rgba(0,0,0,.4)}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+a{color:inherit;text-decoration:none}
+
+/* Header */
+.header{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:16px}
+.logo{font-size:22px;font-weight:800;color:var(--primary);white-space:nowrap;letter-spacing:-0.5px}
+.logo span{color:var(--text)}
+.search-wrap{flex:1;max-width:480px;position:relative;margin:0 auto}
+.search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--text2);pointer-events:none}
+.search-input{width:100%;padding:10px 14px 10px 42px;border:1px solid var(--border);border-radius:24px;font-size:14px;background:var(--bg);color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s}
+.search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.12)}
+.search-input::placeholder{color:var(--text2)}
+.header-actions{display:flex;align-items:center;gap:8px}
+.btn-icon{width:40px;height:40px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s}
+.btn-icon:hover{background:var(--bg);border-color:var(--primary)}
+.btn-icon.active{background:var(--accent);border-color:var(--primary);color:var(--primary)}
+.lang-btn{font-size:13px;font-weight:600;min-width:44px}
+
+/* Main Layout */
+.main{max-width:1280px;margin:0 auto;padding:24px}
+
+/* Stats bar */
+.stats-bar{display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.stats-bar .count{font-size:13px;color:var(--text2)}
+.stats-bar .count strong{color:var(--primary);font-size:15px}
+
+/* Category tabs */
+.cats{display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap}
+.cat-btn{padding:7px 16px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text2);cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;white-space:nowrap}
+.cat-btn:hover{color:var(--primary);border-color:var(--primary)}
+.cat-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* Tool grid */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .2s;cursor:pointer;position:relative;display:flex;flex-direction:column}
+.tool-card:hover{border-color:var(--primary);box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.tool-card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.tool-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0;color:#fff;background:var(--primary)}
+.tool-icon.c0{background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.tool-icon.c1{background:linear-gradient(135deg,#ec4899,#f43f5e)}
+.tool-icon.c2{background:linear-gradient(135deg,#14b8a6,#0ea5e9)}
+.tool-icon.c3{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.tool-icon.c4{background:linear-gradient(135deg,#8b5cf6,#ec4899)}
+.tool-icon.c5{background:linear-gradient(135deg,#06b6d4,#3b82f6)}
+.tool-icon.c6{background:linear-gradient(135deg,#84cc16,#22c55e)}
+.tool-icon.c7{background:linear-gradient(135deg,#f97316,#eab308)}
+.tool-info{flex:1;min-width:0}
+.tool-name{font-size:15px;font-weight:600;margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.tool-name .tag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:500}
+.tag-hot{background:#fef2f2;color:#ef4444}
+.tag-new{background:#ecfdf5;color:#10b981}
+.tag-free{background:#eff6ff;color:#3b82f6}
+.tool-desc{font-size:13px;color:var(--text2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tool-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:12px}
+.tool-meta .badge{font-size:11px;padding:3px 8px;border-radius:12px;background:var(--bg);color:var(--text2);border:1px solid var(--border);white-space:nowrap}
+.tool-meta .badge.cat{background:var(--accent);color:var(--primary);border-color:transparent}
+
+/* No results */
+.empty{text-align:center;padding:60px 20px;color:var(--text2)}
+.empty svg{width:64px;height:64px;margin-bottom:16px;color:var(--border)}
+.empty h3{font-size:16px;margin-bottom:4px;color:var(--text)}
+
+/* Footer */
+.footer{text-align:center;padding:32px 24px;color:var(--text2);font-size:13px;border-top:1px solid var(--border);margin-top:40px}
+.footer a{color:var(--primary)}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:10px 24px;border-radius:24px;font-size:13px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+
+/* Banner */
+.banner{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border-radius:12px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.banner h2{font-size:18px;font-weight:700}
+.banner p{font-size:14px;opacity:.9;margin-top:4px}
+.banner .btn-submit{padding:10px 24px;background:#fff;color:#6366f1;border:none;border-radius:24px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.banner .btn-submit:hover{transform:scale(1.03);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+
+@media(max-width:768px){
+  .header-inner{padding:0 16px;height:56px}
+  .logo{font-size:18px}
+  .search-wrap{max-width:none}
+  .main{padding:16px}
+  .tool-grid{grid-template-columns:1fr}
+  .banner{flex-direction:column;text-align:center;padding:20px}
+  .cats{gap:4px}
+  .cat-btn{padding:6px 12px;font-size:12px}
+}
+
+/* Particles */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.4}
+/* Header glow */
+.header{border-bottom:1px solid var(--border);box-shadow:0 0 30px rgba(99,102,241,.08)}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent);opacity:.6}
+.logo{background:linear-gradient(135deg,var(--primary),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;font-weight:900}
+.logo span{-webkit-text-fill-color:var(--text)}
+/* Tool icon styles */
+.tool-icon-img{width:44px;height:44px;border-radius:10px;flex-shrink:0;object-fit:contain;background:var(--bg);padding:4px}
+.tool-icon-fallback{width:44px;height:44px;border-radius:10px;display:none;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0;color:#fff}
+.tool-icon-img[style*="display:none"] + .tool-icon-fallback,.tool-icon-img:not([src]),.tool-icon-img[src=""]{display:none!important}
+.tool-icon-img[style*="display:none"] + .tool-icon-fallback{display:flex!important}
+/* Visitor counter */
+.visitor-counter{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:8px;font-size:13px;color:var(--text2)}
+.visitor-count{font-weight:700;color:var(--primary);font-size:15px;font-variant-numeric:tabular-nums}
+.visitor-icon{font-size:16px}
+/* Banner glow */
+.banner{position:relative;overflow:hidden}
+.banner::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(255,255,255,.06) 0%,transparent 60%);pointer-events:none}
+/* Card hover glow */
+.tool-card:hover{box-shadow:0 4px 24px rgba(99,102,241,.12),0 0 0 1px var(--primary)}
+
+</style>
+</head>
+<body><canvas id="particles"></canvas>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="logo">AI<span>工具箱</span></a>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" type="text" id="search" placeholder="搜索 AI 工具...">
+    </div>
+    <div class="header-actions">
+      <button class="btn-icon lang-btn active" id="langZh" onclick="setLang('zh')">中</button>
+      <button class="btn-icon lang-btn" id="langEn" onclick="setLang('en')">EN</button>
+      <button class="btn-icon" id="themeToggle" onclick="toggleTheme()" title="切换主题">
+        <svg id="sunIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main class="main">
+  <div class="banner">
+    <div>
+      <h2 data-zh="🤖 发现最好用的 AI 工具" data-en="🤖 Discover the Best AI Tools">🤖 发现最好用的 AI 工具</h2>
+      <p data-zh="收录 200+ 精选 AI 工具，每日更新。帮你找到最适合的人工智能助手。" data-en="200+ curated AI tools, updated daily. Find your perfect AI assistant.">收录 200+ 精选 AI 工具，每日更新。帮你找到最适合的人工智能助手。</p>
+    </div>
+    <button class="btn-submit" onclick="showSubmitForm()" data-zh="提交工具" data-en="Submit Tool">提交工具</button>
+  </div>
+  <div class="stats-bar">
+    <span class="count" data-zh="共 <strong id='toolCount'>0</strong> 个工具" data-en="<strong id='toolCount2'>0</strong> tools in total">共 <strong id="toolCount">0</strong> 个工具</span>
+  </div>
+  <div class="cats" id="cats"></div>
+  <div class="tool-grid" id="toolGrid"></div>
+  <div class="empty" id="empty" style="display:none">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <h3 data-zh="没有找到相关工具" data-en="No tools found">没有找到相关工具</h3>
+    <p data-zh="试试其他关键词或分类" data-en="Try different keywords or categories">试试其他关键词或分类</p>
+  </div>
+</main>
+<footer class="footer">
+  <div class="visitor-counter">
+    <span class="visitor-icon">👁</span>
+    <span class="visitor-label" data-zh="累计访问" data-en="Total Visits">累计访问</span>
+    <span class="visitor-count" id="visitorCount">...</span>
+    <span class="visitor-label" data-zh="次" data-en="">次</span>
+  </div>
+  <p>AI工具箱 © 2026 &nbsp;·&nbsp; <a href="#" onclick="showSubmitForm()" data-zh="提交新工具" data-en="Submit a tool">提交新工具</a> &nbsp;·&nbsp; <a href="mailto:contact@aitoolnav.com">contact@aitoolnav.com</a></p>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== DATA ====================
+const TOOLS = [
+  // Chat & Assistant - 0
+  {id:"chatgpt",n:{zh:"ChatGPT",en:"ChatGPT"},d:{zh:"OpenAI 旗舰对话AI，支持多模态、代码解释、联网搜索",en:"OpenAI's flagship conversational AI with multimodal, code interpreter & web search"},cat:0,url:"https://chat.openai.com",tags:["hot"],aff:true},
+  {id:"claude",n:{zh:"Claude",en:"Claude"},d:{zh:"Anthropic 出品的强大AI助手，擅长长文写作与深度分析",en:"Anthropic's powerful AI assistant, excels at long-form writing & deep analysis"},cat:0,url:"https://claude.ai",tags:["hot"],aff:false},
+  {id:"gemini",n:{zh:"Gemini",en:"Gemini"},d:{zh:"Google 多模态AI模型，深度整合 Google 生态",en:"Google's multimodal AI deeply integrated with Google ecosystem"},cat:0,url:"https://gemini.google.com",tags:[],aff:false},
+  {id:"perplexity",n:{zh:"Perplexity AI",en:"Perplexity AI"},d:{zh:"AI 搜索引擎，实时联网检索并给出带引用的精准回答",en:"AI search engine with real-time web retrieval and cited answers"},cat:0,url:"https://www.perplexity.ai",tags:["hot"],aff:false},
+  {id:"kimi",n:{zh:"Kimi 月之暗面",en:"Kimi"},d:{zh:"国产超长上下文AI助手，支持200万字一次性输入",en:"Chinese AI assistant with 2M token context window"},cat:0,url:"https://kimi.moonshot.cn",tags:["hot","free"],aff:false},
+  {id:"doubao",n:{zh:"豆包",en:"Doubao"},d:{zh:"字节跳动旗下AI对话助手，免费好用、支持多模态",en:"ByteDance's free AI assistant with multimodal support"},cat:0,url:"https://www.doubao.com",tags:["free"],aff:false},
+  {id:"tongyi",n:{zh:"通义千问",en:"Tongyi Qianwen"},d:{zh:"阿里云出品的AI助手，代码和办公场景表现出色",en:"Alibaba Cloud's AI assistant, great at coding and office tasks"},cat:0,url:"https://tongyi.aliyun.com",tags:["free"],aff:false},
+  {id:"deepseek",n:{zh:"DeepSeek",en:"DeepSeek"},d:{zh:"开源大模型领军者，极低价格提供接近 GPT-4 的性能",en:"Open-source LLM leader delivering near GPT-4 performance at extreme low cost"},cat:0,url:"https://chat.deepseek.com",tags:["hot","free"],aff:false},
+  {id:"poe",n:{zh:"Poe",en:"Poe"},d:{zh:"一站式使用 ChatGPT、Claude 等多种 AI 模型的聚合平台",en:"All-in-one platform to access ChatGPT, Claude and many other AI models"},cat:0,url:"https://poe.com",tags:[],aff:false},
+  {id:"character-ai",n:{zh:"Character.AI",en:"Character.AI"},d:{zh:"创建和对话各种AI角色，沉浸式角色扮演体验",en:"Create and chat with AI characters for immersive roleplay experiences"},cat:0,url:"https://character.ai",tags:[],aff:false},
+
+  // Image Generation - 1
+  {id:"midjourney",n:{zh:"Midjourney",en:"Midjourney"},d:{zh:"最受欢迎的AI绘画工具，艺术感极强，V7 版本画质惊艳",en:"Most popular AI art generator with stunning artistic quality in V7"},cat:1,url:"https://www.midjourney.com",tags:["hot"],aff:false},
+  {id:"dalle",n:{zh:"DALL·E 3",en:"DALL·E 3"},d:{zh:"OpenAI 出品，集成于 ChatGPT，文本理解精准",en:"OpenAI's image generator integrated with ChatGPT, precise text understanding"},cat:1,url:"https://openai.com/dall-e-3",tags:[],aff:false},
+  {id:"stable-diffusion",n:{zh:"Stable Diffusion",en:"Stable Diffusion"},d:{zh:"最流行的开源AI绘画模型，可本地部署、完全免费",en:"Most popular open-source AI image model, can run locally for free"},cat:1,url:"https://stability.ai",tags:["free"],aff:false},
+  {id:"leonardo",n:{zh:"Leonardo.AI",en:"Leonardo.AI"},d:{zh:"面向游戏和设计的AI绘画平台，支持模型训练和素材生成",en:"AI art platform for games & design with model training and asset generation"},cat:1,url:"https://leonardo.ai",tags:[],aff:false},
+  {id:"jimeng",n:{zh:"即梦",en:"Jimeng"},d:{zh:"字节跳动AI绘画工具，支持文生图、图生图，中文理解优秀",en:"ByteDance AI art tool, great Chinese prompt understanding"},cat:1,url:"https://jimeng.jianying.com",tags:["free"],aff:false},
+  {id:"whee",n:{zh:"WHEE",en:"WHEE"},d:{zh:"美图秀秀旗下 AI 绘画工具，中文语义理解好，模板丰富",en:"Meitu's AI art tool with great Chinese semantics and rich templates"},cat:1,url:"https://www.whee.com",tags:["free"],aff:false},
+
+  // Video Generation - 2
+  {id:"sora",n:{zh:"Sora",en:"Sora"},d:{zh:"OpenAI 视频生成模型，可从文本生成高质量视频",en:"OpenAI's video generation model, high-quality text-to-video"},cat:2,url:"https://sora.com",tags:["new"],aff:false},
+  {id:"runway",n:{zh:"Runway",en:"Runway"},d:{zh:"专业AI视频编辑与生成平台，Gen-3 模型行业领先",en:"Pro AI video editing & generation platform, Gen-3 model leads the industry"},cat:2,url:"https://runwayml.com",tags:["hot"],aff:false},
+  {id:"pika",n:{zh:"Pika",en:"Pika"},d:{zh:"简单易用的 AI 视频生成工具，特效丰富",en:"Easy-to-use AI video generator with rich effects"},cat:2,url:"https://pika.art",tags:[],aff:false},
+  {id:"kling",n:{zh:"可灵",en:"Kling"},d:{zh:"快手出品的AI视频生成工具，支持图生视频和文生视频",en:"Kuaishou's AI video generator, image-to-video & text-to-video"},cat:2,url:"https://kling.kuaishou.com",tags:["hot","free"],aff:false},
+  {id:"jimeng-video",n:{zh:"即梦视频",en:"Jimeng Video"},d:{zh:"字节跳动 AI 视频生成，中文场景表现出色",en:"ByteDance AI video generation, great for Chinese scenes"},cat:2,url:"https://jimeng.jianying.com",tags:["free"],aff:false},
+  {id:"haiper",n:{zh:"Haiper",en:"Haiper"},d:{zh:"前 DeepMind 团队打造的 AI 视频生成工具",en:"AI video tool built by ex-DeepMind team"},cat:2,url:"https://www.haiper.ai",tags:[],aff:false},
+
+  // Writing - 3
+  {id:"jasper",n:{zh:"Jasper",en:"Jasper"},d:{zh:"专业AI营销文案写作工具，品牌调性定制，团队协作",en:"Pro AI marketing copywriter with brand voice customization & team collaboration"},cat:3,url:"https://www.jasper.ai",tags:[],aff:true},
+  {id:"grammarly",n:{zh:"Grammarly",en:"Grammarly"},d:{zh:"全球最流行的 AI 英文写作助手，语法纠错+风格优化",en:"World's most popular AI writing assistant for grammar & style"},cat:3,url:"https://www.grammarly.com",tags:[],aff:true},
+  {id:"notion-ai",n:{zh:"Notion AI",en:"Notion AI"},d:{zh:"集成在 Notion 中的 AI 写作工具，笔记、文档、项目管理全覆盖",en:"AI writing built into Notion, covering notes, docs & project management"},cat:3,url:"https://www.notion.so/product/ai",tags:[],aff:false},
+  {id:"xiezuo",n:{zh:"写作猫",en:"Xiezuo Cat"},d:{zh:"中文AI写作助手，支持文案、论文、小说等场景",en:"Chinese AI writing assistant for copywriting, essays & novels"},cat:3,url:"https://xiezuocat.com",tags:["free"],aff:false},
+  {id:"copy-ai",n:{zh:"Copy.ai",en:"Copy.ai"},d:{zh:"AI 营销文案生成器，支持销售邮件、社媒帖子等场景",en:"AI marketing copy generator for sales emails, social posts & more"},cat:3,url:"https://www.copy.ai",tags:[],aff:true},
+  {id:"writesonic",n:{zh:"Writesonic",en:"Writesonic"},d:{zh:"一站式 AI 内容创作平台，SEO文章、广告文案均可生成",en:"All-in-one AI content platform for SEO articles & ad copy"},cat:3,url:"https://writesonic.com",tags:[],aff:true},
+
+  // Coding - 4
+  {id:"cursor",n:{zh:"Cursor",en:"Cursor"},d:{zh:"AI 原生代码编辑器，深度集成 Claude 和 GPT，大幅提升开发效率",en:"AI-native code editor deeply integrated with Claude & GPT"},cat:4,url:"https://cursor.sh",tags:["hot"],aff:false},
+  {id:"github-copilot",n:{zh:"GitHub Copilot",en:"GitHub Copilot"},d:{zh:"微软/GitHub 出品的 AI 编程助手，深度支持 VS Code 和 JetBrains",en:"Microsoft's AI coding assistant for VS Code & JetBrains"},cat:4,url:"https://github.com/features/copilot",tags:[],aff:false},
+  {id:"windsurf",n:{zh:"Windsurf",en:"Windsurf"},d:{zh:"Codeium 出品的 AI IDE，上下文理解能力出色",en:"AI IDE by Codeium with excellent context understanding"},cat:4,url:"https://codeium.com/windsurf",tags:["hot"],aff:false},
+  {id:"v0",n:{zh:"v0 by Vercel",en:"v0 by Vercel"},d:{zh:"Vercel 出品，用自然语言一句话生成前端 UI 界面",en:"Generate frontend UI from natural language by Vercel"},cat:4,url:"https://v0.dev",tags:["hot","free"],aff:false},
+  {id:"bolt",n:{zh:"Bolt.new",en:"Bolt.new"},d:{zh:"StackBlitz 出品，在线即时生成并运行全栈应用",en:"Instant full-stack app generation & execution by StackBlitz"},cat:4,url:"https://bolt.new",tags:["hot"],aff:false},
+  {id:"lovable",n:{zh:"Lovable",en:"Lovable"},d:{zh:"AI 全栈应用生成器，一句话描述即可生成可部署的应用",en:"AI full-stack app builder, deployable apps from a single prompt"},cat:4,url:"https://lovable.dev",tags:["new"],aff:false},
+  {id:"replit",n:{zh:"Replit",en:"Replit"},d:{zh:"在线编程环境 + AI Agent，浏览器里完成开发全流程",en:"Online IDE + AI Agent, complete dev workflow in the browser"},cat:4,url:"https://replit.com",tags:[],aff:false},
+  {id:"codex-cli",n:{zh:"Codex CLI",en:"Codex CLI"},d:{zh:"OpenAI 出品的终端AI编程助手，命令行下全自动开发",en:"OpenAI's terminal AI coding agent for fully automated development"},cat:4,url:"https://github.com/openai/codex",tags:["new","free"],aff:false},
+
+  // Design - 5
+  {id:"canva",n:{zh:"Canva AI",en:"Canva AI"},d:{zh:"知名设计平台，AI功能可一键生成演示文稿、海报等",en:"Famous design platform with AI for presentations, posters & more"},cat:5,url:"https://www.canva.com",tags:["hot"],aff:false},
+  {id:"figma-ai",n:{zh:"Figma AI",en:"Figma AI"},d:{zh:"UI/UX 设计工具标杆，AI 功能可自动生成设计稿和组件",en:"UI/UX design standard with AI for auto-generating designs & components"},cat:5,url:"https://www.figma.com",tags:[],aff:false},
+  {id:"galileo-ai",n:{zh:"Galileo AI",en:"Galileo AI"},d:{zh:"从文字描述直接生成可交互的 UI 设计稿",en:"Generate interactive UI designs directly from text descriptions"},cat:5,url:"https://www.usegalileo.ai",tags:[],aff:false},
+  {id:"remove-bg",n:{zh:"Remove.bg",en:"Remove.bg"},d:{zh:"一键 AI 去除图片背景，5秒搞定",en:"One-click AI background removal, done in 5 seconds"},cat:5,url:"https://www.remove.bg",tags:["free"],aff:true},
+  {id:"clipdrop",n:{zh:"Clipdrop",en:"Clipdrop"},d:{zh:"AI 图像处理套件：放大、重光照、背景替换等",en:"AI image processing suite: upscale, relight, background replace"},cat:5,url:"https://clipdrop.co",tags:[],aff:false},
+
+  // Productivity - 6
+  {id:"gamma",n:{zh:"Gamma",en:"Gamma"},d:{zh:"AI 一键生成精美演示文稿、文档和网页",en:"AI-powered beautiful presentations, docs & webpages"},cat:6,url:"https://gamma.app",tags:["hot"],aff:false},
+  {id:"beautiful-ai",n:{zh:"Beautiful.ai",en:"Beautiful.ai"},d:{zh:"AI 自动排版的演示文稿工具，设计师级别的PPT效果",en:"AI auto-layout presentation tool with designer-quality slides"},cat:6,url:"https://www.beautiful.ai",tags:[],aff:false},
+  {id:"mem",n:{zh:"Mem",en:"Mem"},d:{zh:"AI 驱动的笔记应用，自动整理、关联你的所有知识",en:"AI-powered notes app that auto-organizes & connects your knowledge"},cat:6,url:"https://get.mem.ai",tags:[],aff:false},
+  {id:"taskade",n:{zh:"Taskade",en:"Taskade"},d:{zh:"AI 项目管理 + 思维导图 + 文档协作一体化工具",en:"AI project management + mind maps + docs collaboration in one"},cat:6,url:"https://www.taskade.com",tags:[],aff:false},
+  {id:"otter",n:{zh:"Otter.ai",en:"Otter.ai"},d:{zh:"AI 会议记录与实时转录工具，自动生成会议纪要和摘要",en:"AI meeting notes & real-time transcription with auto summaries"},cat:6,url:"https://otter.ai",tags:[],aff:false},
+  {id:"feishu",n:{zh:"飞书智能伙伴",en:"Lark AI"},d:{zh:"飞书内置AI助手，会议纪要、文档总结、表格分析全能",en:"Lark's built-in AI for meeting notes, doc summaries & sheet analysis"},cat:6,url:"https://www.feishu.cn",tags:["free"],aff:false},
+
+  // Audio & Music - 7
+  {id:"elevenlabs",n:{zh:"ElevenLabs",en:"ElevenLabs"},d:{zh:"最逼真的AI语音合成与克隆工具，支持多语种",en:"Most realistic AI voice synthesis & cloning, multilingual support"},cat:7,url:"https://elevenlabs.io",tags:["hot"],aff:true},
+  {id:"suno",n:{zh:"Suno",en:"Suno"},d:{zh:"AI 音乐生成器，输入歌词和风格即可创作完整歌曲",en:"AI music generator, create full songs from lyrics & style prompts"},cat:7,url:"https://suno.com",tags:["hot"],aff:false},
+  {id:"udio",n:{zh:"Udio",en:"Udio"},d:{zh:"高品质 AI 音乐生成平台，音质出色",en:"High-quality AI music generation with excellent audio fidelity"},cat:7,url:"https://www.udio.com",tags:[],aff:false},
+  {id:"notebooklm",n:{zh:"NotebookLM",en:"NotebookLM"},d:{zh:"Google AI 笔记工具，可生成双人播客式的音频深度讨论",en:"Google's AI notebook that generates podcast-style audio discussions"},cat:7,url:"https://notebooklm.google.com",tags:["hot","free"],aff:false},
+  {id:"mureka",n:{zh:"Mureka",en:"Mureka"},d:{zh:"AI 音乐创作平台，支持多种风格和商用授权",en:"AI music creation platform with multiple styles & commercial license"},cat:7,url:"https://www.mureka.ai",tags:[],aff:false},
+  {id:"hailuo",n:{zh:"海螺 AI",en:"Hailuo AI"},d:{zh:"MiniMax 出品，AI语音合成、视频生成等多模态工具",en:"MiniMax multimodal AI: voice synthesis, video generation & more"},cat:7,url:"https://hailuoai.com",tags:["free"],aff:false},
+
+  // Marketing - 8
+  {id:"semrush",n:{zh:"Semrush",en:"Semrush"},d:{zh:"SEO/SEM 全栈营销工具，AI 驱动的关键词和竞品分析",en:"Full-stack SEO/SEM tool with AI-powered keyword & competitor analysis"},cat:8,url:"https://www.semrush.com",tags:[],aff:true},
+  {id:"zapier",n:{zh:"Zapier",en:"Zapier"},d:{zh:"AI 自动化工作流平台，连接 7000+ 应用无需编程",en:"AI automation platform connecting 7000+ apps, no coding needed"},cat:8,url:"https://zapier.com",tags:[],aff:false},
+  {id:"adcreative",n:{zh:"AdCreative.ai",en:"AdCreative.ai"},d:{zh:"AI 广告素材生成工具，快速产出高转化率的广告图",en:"AI ad creative generator for high-conversion ad visuals"},cat:8,url:"https://www.adcreative.ai",tags:[],aff:true},
+  {id:"hubspot",n:{zh:"HubSpot AI",en:"HubSpot AI"},d:{zh:"全球领先的CRM平台，内置AI营销、销售、客服功能",en:"World-leading CRM platform with AI marketing, sales & service"},cat:8,url:"https://www.hubspot.com",tags:[],aff:true},
+  {id:"jasper-art",n:{zh:"Jasper Art",en:"Jasper Art"},d:{zh:"Jasper 内置的 AI 图片生成，专为营销视觉设计",en:"Jasper's built-in AI image generator designed for marketing visuals"},cat:8,url:"https://www.jasper.ai/art",tags:[],aff:true},
+
+  // Other - 9
+  {id:"perplexity",n:{zh:"Perplexity",en:"Perplexity"},d:{zh:"AI 搜索引擎，实时联网检索并提供带引用的答案",en:"AI search engine with real-time web search and cited answers"},cat:9,url:"https://www.perplexity.ai",tags:["hot"],aff:false},
+  {id:"you",n:{zh:"You.com",en:"You.com"},d:{zh:"注重隐私的 AI 搜索引擎，支持多种 AI 模型切换",en:"Privacy-focused AI search engine with multiple AI model options"},cat:9,url:"https://you.com",tags:[],aff:false},
+  {id:"meta-ai",n:{zh:"Meta AI",en:"Meta AI"},d:{zh:"集成在 Facebook/Instagram/WhatsApp 中的免费 AI 助手",en:"Free AI assistant integrated in Facebook, Instagram & WhatsApp"},cat:9,url:"https://www.meta.ai",tags:["free"],aff:false},
+  {id:"civitai",n:{zh:"Civitai",en:"Civitai"},d:{zh:"AI 绘画模型分享社区，海量 Stable Diffusion 模型免费下载",en:"AI art model sharing community, massive free Stable Diffusion models"},cat:9,url:"https://civitai.com",tags:["free"],aff:false},
+  {id:"huggingface",n:{zh:"Hugging Face",en:"Hugging Face"},d:{zh:"全球最大 AI 模型开源社区，数十万模型和数据集",en:"World's largest open-source AI community, 100K+ models & datasets"},cat:9,url:"https://huggingface.co",tags:["free"],aff:false},
+  {id:"promptbase",n:{zh:"PromptBase",en:"PromptBase"},d:{zh:"AI 提示词交易市场，买卖 Midjourney/DALL·E 等工具的提示词",en:"Marketplace for buying & selling AI prompts for Midjourney, DALL·E etc."},cat:9,url:"https://promptbase.com",tags:[],aff:false},
+  {id:"tlk-io",n:{zh:"Trae",en:"Trae"},d:{zh:"字节跳动出品的 AI IDE，免费集成 Claude 和 GPT 模型",en:"ByteDance AI IDE with free Claude & GPT integration"},cat:9,url:"https://www.trae.ai",tags:["new","free"],aff:false},
+];
+
+const CATS = [
+  {id:0,n:{zh:"聊天对话",en:"Chat"},icon:"💬"},
+  {id:1,n:{zh:"图像生成",en:"Image"},icon:"🎨"},
+  {id:2,n:{zh:"视频生成",en:"Video"},icon:"🎬"},
+  {id:3,n:{zh:"写作助手",en:"Writing"},icon:"✍️"},
+  {id:4,n:{zh:"编程开发",en:"Coding"},icon:"💻"},
+  {id:5,n:{zh:"设计创意",en:"Design"},icon:"🖌️"},
+  {id:6,n:{zh:"办公效率",en:"Productivity"},icon:"📊"},
+  {id:7,n:{zh:"音频音乐",en:"Audio"},icon:"🎵"},
+  {id:8,n:{zh:"营销增长",en:"Marketing"},icon:"📈"},
+  {id:9,n:{zh:"更多工具",en:"More"},icon:"🔧"},
+];
+
+let lang = 'zh';
+let activeCat = null;
+let theme = 'light';
+
+// ==================== RENDER ====================
+function setLang(l){lang=l;document.getElementById('langZh').classList.toggle('active',l==='zh');document.getElementById('langEn').classList.toggle('active',l==='en');document.querySelectorAll('[data-zh]').forEach(el=>{const t=el.getAttribute('data-'+l);if(t){if(el.tagName==='INPUT'){el.placeholder=t;}else{el.textContent=t;}}});
+// Visitor counter using CountAPI
+async function updateVisitorCount(){
+  const el=document.getElementById('visitorCount');
+  try{
+    const ns='aitoolnav-tools';
+    const key='visits';
+    await fetch('https://api.countapi.xyz/hit/'+ns+'/'+key,{method:'GET'});
+    const res=await fetch('https://api.countapi.xyz/get/'+ns+'/'+key);
+    const data=await res.json();
+    if(data&&data.value)el.textContent=data.value.toLocaleString();
+  }catch(e){
+    // Fallback to localStorage
+    let count=parseInt(localStorage.getItem('aitoolnav_visits')||'1');
+    if(!sessionStorage.getItem('aitoolnav_counted')){
+      count++;localStorage.setItem('aitoolnav_visits',count);
+      sessionStorage.setItem('aitoolnav_counted','1');
+    }
+    el.textContent=count.toLocaleString();
+  }
+}
+updateVisitorCount();
+render();}
+
+function toggleTheme(){
+  theme = theme==='light'?'dark':'light';
+  document.body.classList.toggle('dark',theme==='dark');
+  document.getElementById('sunIcon').style.display = theme==='dark'?'none':'';
+  document.getElementById('moonIcon').style.display = theme==='dark'?'':'none';
+  localStorage.setItem('aitools-theme',theme);
+}
+
+function render(){
+  const search = document.getElementById('search').value.toLowerCase();
+  let filtered = TOOLS;
+  if(activeCat !== null) filtered = filtered.filter(t=>t.cat===activeCat);
+  if(search) filtered = filtered.filter(t=>t.n[lang].toLowerCase().includes(search)||t.d[lang].toLowerCase().includes(search)||(t.tags||[]).some(tg=>tg.toLowerCase().includes(search)));
+
+  document.getElementById('toolCount').textContent = filtered.length;
+  const grid = document.getElementById('toolGrid');
+  grid.innerHTML = filtered.map((t,i)=>{
+    const tags = (t.tags||[]).map(tg=>{
+      const cls = tg==='hot'?'tag-hot':tg==='new'?'tag-new':tg==='free'?'tag-free':'';
+      const label = tg==='hot'?(lang==='zh'?'热门':'Hot'):tg==='new'?(lang==='zh'?'新品':'New'):tg==='free'?(lang==='zh'?'免费':'Free'):tg;
+      return `<span class="tag ${cls}">${label}</span>`;
+    }).join('');
+    const cat = CATS.find(c=>c.id===t.cat);
+    return `<a class="tool-card" href="${t.url}" target="_blank" rel="noopener" onclick="trackClick('${t.id}')">
+      <div class="tool-card-top">
+        <img class="tool-icon-img" src="https://www.google.com/s2/favicons?domain=${new URL(t.url).hostname}&sz=64" onerror="this.style.display='none'" alt="" loading="lazy"><div class="tool-icon-fallback c${i%8}">${cat?cat.icon:'🔧'}</div>
+        <div class="tool-info">
+          <div class="tool-name">${t.n[lang]} ${tags}</div>
+          <div class="tool-desc">${t.d[lang]}</div>
+        </div>
+      </div>
+      <div class="tool-meta">
+        <span class="badge cat">${cat?cat.n[lang]:''}</span>
+        ${t.aff?`<span class="badge">${lang==='zh'?'联盟返佣':'Affiliate'}</span>`:''}
+      </div>
+    </a>`;
+  }).join('');
+
+  // Cats
+  document.getElementById('cats').innerHTML = [
+    `<button class="cat-btn ${activeCat===null?'active':''}" onclick="selectCat(null)">${lang==='zh'?'全部':'All'}</button>`,
+    ...CATS.map(c=>`<button class="cat-btn ${activeCat===c.id?'active':''}" onclick="selectCat(${c.id})">${c.icon} ${c.n[lang]}</button>`)
+  ].join('');
+
+  document.getElementById('empty').style.display = filtered.length ? 'none' : '';
+}
+
+function selectCat(id){activeCat=id;render();}
+function trackClick(id){console.log('click:',id);}
+
+function showSubmitForm(){showToast(lang==='zh'?'提交功能开发中，请发送邮件至 contact@aitoolnav.com':'Submit feature coming soon, email contact@aitoolnav.com');}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+
+// Particle starfield
+(function(){
+  const c=document.getElementById('particles'),ctx=c.getContext('2d');
+  let w,h,particles=[];
+  function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<60;i++)particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.3,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,o:Math.random()*.5+.2});
+  function anim(){
+    ctx.clearRect(0,0,w,h);
+    const isDark=document.body.classList.contains('dark');
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=isDark?'rgba(255,255,255,'+p.o+')':'rgba(99,102,241,'+p.o+')';
+      ctx.fill();
+    });
+    requestAnimationFrame(anim);
+  }
+  anim();
+  // Redraw on theme toggle
+  new MutationObserver(()=>{}).observe(document.body,{attributes:true,attributeFilter:['class']});
+})();
+
+// Init
+document.getElementById('search').addEventListener('input',render);
+const saved = localStorage.getItem('aitools-theme');
+if(saved==='dark') toggleTheme();
+render();
+</script>
+</body>
+</html>
