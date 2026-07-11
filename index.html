@@ -150,7 +150,7 @@ a{color:inherit;text-decoration:none}
   <div class="banner">
     <div>
       <h2 data-zh="🤖 发现最好用的 AI 工具" data-en="🤖 Discover the Best AI Tools">🤖 发现最好用的 AI 工具</h2>
-      <p data-zh="收录 200+ 精选 AI 工具，每日更新。帮你找到最适合的人工智能助手。" data-en="200+ curated AI tools, updated daily. Find your perfect AI assistant.">收录 200+ 精选 AI 工具，每日更新。帮你找到最适合的人工智能助手。</p>
+      <p data-zh="只收录国内能用的AI工具。按场景发现，让AI为你工作。" data-en="China-accessible AI tools only. Discover by scenario, let AI work for you.">收录 200+ 精选 AI 工具，每日更新。帮你找到最适合的人工智能助手。</p>
     </div>
     <button class="btn-submit" onclick="showSubmitForm()" data-zh="提交工具" data-en="Submit Tool">提交工具</button>
   </div>
@@ -172,110 +172,78 @@ a{color:inherit;text-decoration:none}
     <span class="visitor-count" id="visitorCount">...</span>
     <span class="visitor-label" data-zh="次" data-en="">次</span>
   </div>
-  <p>AI工具箱 © 2026 &nbsp;·&nbsp; <a href="#" onclick="showSubmitForm()" data-zh="提交新工具" data-en="Submit a tool">提交新工具</a> &nbsp;·&nbsp; <a href="mailto:contact@aitoolnav.com">contact@aitoolnav.com</a></p>
+  <p>AI工具箱 © 2026 &nbsp;·&nbsp; <a href="#" onclick="showSubmitForm()" data-zh="提交新工具" data-en="Submit a tool">提交新工具</a> &nbsp;·&nbsp; <a href="mailto:gdg.ai.tools@gmail.com">gdg.ai.tools@gmail.com</a></p>
 </footer>
 <div class="toast" id="toast"></div>
 
 <script>
 // ==================== DATA ====================
 const TOOLS = [
-  // Chat & Assistant - 0
-  {id:"chatgpt",n:{zh:"ChatGPT",en:"ChatGPT"},d:{zh:"OpenAI 旗舰对话AI，支持多模态、代码解释、联网搜索",en:"OpenAI's flagship conversational AI with multimodal, code interpreter & web search"},cat:0,url:"https://chat.openai.com",tags:["hot"],aff:true},
-  {id:"claude",n:{zh:"Claude",en:"Claude"},d:{zh:"Anthropic 出品的强大AI助手，擅长长文写作与深度分析",en:"Anthropic's powerful AI assistant, excels at long-form writing & deep analysis"},cat:0,url:"https://claude.ai",tags:["hot"],aff:false},
-  {id:"gemini",n:{zh:"Gemini",en:"Gemini"},d:{zh:"Google 多模态AI模型，深度整合 Google 生态",en:"Google's multimodal AI deeply integrated with Google ecosystem"},cat:0,url:"https://gemini.google.com",tags:[],aff:false},
-  {id:"perplexity",n:{zh:"Perplexity AI",en:"Perplexity AI"},d:{zh:"AI 搜索引擎，实时联网检索并给出带引用的精准回答",en:"AI search engine with real-time web retrieval and cited answers"},cat:0,url:"https://www.perplexity.ai",tags:["hot"],aff:false},
-  {id:"kimi",n:{zh:"Kimi 月之暗面",en:"Kimi"},d:{zh:"国产超长上下文AI助手，支持200万字一次性输入",en:"Chinese AI assistant with 2M token context window"},cat:0,url:"https://kimi.moonshot.cn",tags:["hot","free"],aff:false},
-  {id:"doubao",n:{zh:"豆包",en:"Doubao"},d:{zh:"字节跳动旗下AI对话助手，免费好用、支持多模态",en:"ByteDance's free AI assistant with multimodal support"},cat:0,url:"https://www.doubao.com",tags:["free"],aff:false},
-  {id:"tongyi",n:{zh:"通义千问",en:"Tongyi Qianwen"},d:{zh:"阿里云出品的AI助手，代码和办公场景表现出色",en:"Alibaba Cloud's AI assistant, great at coding and office tasks"},cat:0,url:"https://tongyi.aliyun.com",tags:["free"],aff:false},
-  {id:"deepseek",n:{zh:"DeepSeek",en:"DeepSeek"},d:{zh:"开源大模型领军者，极低价格提供接近 GPT-4 的性能",en:"Open-source LLM leader delivering near GPT-4 performance at extreme low cost"},cat:0,url:"https://chat.deepseek.com",tags:["hot","free"],aff:false},
-  {id:"poe",n:{zh:"Poe",en:"Poe"},d:{zh:"一站式使用 ChatGPT、Claude 等多种 AI 模型的聚合平台",en:"All-in-one platform to access ChatGPT, Claude and many other AI models"},cat:0,url:"https://poe.com",tags:[],aff:false},
-  {id:"character-ai",n:{zh:"Character.AI",en:"Character.AI"},d:{zh:"创建和对话各种AI角色，沉浸式角色扮演体验",en:"Create and chat with AI characters for immersive roleplay experiences"},cat:0,url:"https://character.ai",tags:[],aff:false},
+  // Hot - 0
+  {id:"doubao",n:{zh:"豆包",en:"Doubao"},d:{zh:"字节跳动旗下免费AI助手，支持对话、写作、翻译、画画，日常全能",en:"ByteDance free AI assistant for chat, writing, translation & drawing"},cat:0,url:"https://www.doubao.com",tags:["hot","free"],aff:false},
+  {id:"kimi",n:{zh:"Kimi 月之暗面",en:"Kimi"},d:{zh:"超长上下文AI助手，200万字一次性输入，读长文档神器",en:"Ultra-long context AI, 2M token input, perfect for long documents"},cat:0,url:"https://kimi.moonshot.cn",tags:["hot","free"],aff:false},
+  {id:"tongyi",n:{zh:"通义千问",en:"Tongyi Qianwen"},d:{zh:"阿里云出品全能AI助手，写代码、做表格、搜资料都行",en:"Alibaba Cloud all-in-one AI for coding, spreadsheets & search"},cat:0,url:"https://tongyi.aliyun.com",tags:["hot","free"],aff:false},
+  {id:"deepseek",n:{zh:"DeepSeek",en:"DeepSeek"},d:{zh:"开源大模型领头羊，推理能力极强，免费使用",en:"Open-source LLM leader, powerful reasoning, free to use"},cat:0,url:"https://chat.deepseek.com",tags:["hot","free"],aff:false},
+  {id:"wenxin",n:{zh:"文心一言",en:"ERNIE Bot"},d:{zh:"百度AI大模型，中文理解很出色，深度整合百度搜索",en:"Baidu AI model, excellent Chinese understanding, integrated with Baidu search"},cat:0,url:"https://yiyan.baidu.com",tags:["free"],aff:false},
+  {id:"xunfei",n:{zh:"讯飞星火",en:"iFlytek Spark"},d:{zh:"科大讯飞出品，语音转文字、AI写作、PPT生成超强",en:"iFlytek AI, excellent voice-to-text, writing & PPT generation"},cat:0,url:"https://xinghuo.xfyun.cn",tags:["free"],aff:false},
 
-  // Image Generation - 1
-  {id:"midjourney",n:{zh:"Midjourney",en:"Midjourney"},d:{zh:"最受欢迎的AI绘画工具，艺术感极强，V7 版本画质惊艳",en:"Most popular AI art generator with stunning artistic quality in V7"},cat:1,url:"https://www.midjourney.com",tags:["hot"],aff:false},
-  {id:"dalle",n:{zh:"DALL·E 3",en:"DALL·E 3"},d:{zh:"OpenAI 出品，集成于 ChatGPT，文本理解精准",en:"OpenAI's image generator integrated with ChatGPT, precise text understanding"},cat:1,url:"https://openai.com/dall-e-3",tags:[],aff:false},
-  {id:"stable-diffusion",n:{zh:"Stable Diffusion",en:"Stable Diffusion"},d:{zh:"最流行的开源AI绘画模型，可本地部署、完全免费",en:"Most popular open-source AI image model, can run locally for free"},cat:1,url:"https://stability.ai",tags:["free"],aff:false},
-  {id:"leonardo",n:{zh:"Leonardo.AI",en:"Leonardo.AI"},d:{zh:"面向游戏和设计的AI绘画平台，支持模型训练和素材生成",en:"AI art platform for games & design with model training and asset generation"},cat:1,url:"https://leonardo.ai",tags:[],aff:false},
-  {id:"jimeng",n:{zh:"即梦",en:"Jimeng"},d:{zh:"字节跳动AI绘画工具，支持文生图、图生图，中文理解优秀",en:"ByteDance AI art tool, great Chinese prompt understanding"},cat:1,url:"https://jimeng.jianying.com",tags:["free"],aff:false},
-  {id:"whee",n:{zh:"WHEE",en:"WHEE"},d:{zh:"美图秀秀旗下 AI 绘画工具，中文语义理解好，模板丰富",en:"Meitu's AI art tool with great Chinese semantics and rich templates"},cat:1,url:"https://www.whee.com",tags:["free"],aff:false},
+  // Art & Design - 1
+  {id:"jimeng",n:{zh:"即梦AI",en:"Jimeng AI"},d:{zh:"字节跳动AI绘画，中文提示词效果好，免费额度多",en:"ByteDance AI art, great Chinese prompts, lots of free credits"},cat:1,url:"https://jimeng.jianying.com",tags:["hot","free"],aff:false},
+  {id:"whee",n:{zh:"WHEE",en:"WHEE"},d:{zh:"美图旗下AI绘画，模板丰富，新手友好",en:"Meitu AI art, rich templates, beginner-friendly"},cat:1,url:"https://www.whee.com",tags:["free"],aff:false},
+  {id:"gaoding",n:{zh:"稿定AI",en:"Gaoding AI"},d:{zh:"一键生成海报、电商图、logo，电商卖家必备",en:"One-click poster, e-commerce image & logo generation"},cat:1,url:"https://www.gaoding.com",tags:[],aff:false},
+  {id:"zuotang",n:{zh:"佐糖",en:"Zuotang"},d:{zh:"在线AI抠图、照片修复、无损放大，完全免费",en:"Free online AI background removal, photo repair & upscaling"},cat:1,url:"https://www.zuotang.com",tags:["free"],aff:false},
+  {id:"duiyou",n:{zh:"堆友",en:"Duiyou"},d:{zh:"阿里出品，AI生成3D素材、图标、头像，设计师神器",en:"Alibaba AI 3D asset & icon generator, designer tool"},cat:1,url:"https://www.duiyou.com",tags:["free"],aff:false},
+  {id:"miaoya",n:{zh:"妙鸭相机",en:"Miaoya Camera"},d:{zh:"上传几张自拍，AI生成精美写真，朋友圈爆款",en:"Upload selfies, AI generates stunning portraits, social media hit"},cat:1,url:"https://miaoya.aliyun.com",tags:["new"],aff:false},
+  {id:"arc",n:{zh:"ARC修图",en:"ARC"},d:{zh:"AI一键修图：人像美化、老照片修复、黑白上色",en:"AI one-click photo retouching: portrait, old photo repair, colorization"},cat:1,url:"https://arc.tencent.com",tags:["free"],aff:false},
 
-  // Video Generation - 2
-  {id:"sora",n:{zh:"Sora",en:"Sora"},d:{zh:"OpenAI 视频生成模型，可从文本生成高质量视频",en:"OpenAI's video generation model, high-quality text-to-video"},cat:2,url:"https://sora.com",tags:["new"],aff:false},
-  {id:"runway",n:{zh:"Runway",en:"Runway"},d:{zh:"专业AI视频编辑与生成平台，Gen-3 模型行业领先",en:"Pro AI video editing & generation platform, Gen-3 model leads the industry"},cat:2,url:"https://runwayml.com",tags:["hot"],aff:false},
-  {id:"pika",n:{zh:"Pika",en:"Pika"},d:{zh:"简单易用的 AI 视频生成工具，特效丰富",en:"Easy-to-use AI video generator with rich effects"},cat:2,url:"https://pika.art",tags:[],aff:false},
-  {id:"kling",n:{zh:"可灵",en:"Kling"},d:{zh:"快手出品的AI视频生成工具，支持图生视频和文生视频",en:"Kuaishou's AI video generator, image-to-video & text-to-video"},cat:2,url:"https://kling.kuaishou.com",tags:["hot","free"],aff:false},
-  {id:"jimeng-video",n:{zh:"即梦视频",en:"Jimeng Video"},d:{zh:"字节跳动 AI 视频生成，中文场景表现出色",en:"ByteDance AI video generation, great for Chinese scenes"},cat:2,url:"https://jimeng.jianying.com",tags:["free"],aff:false},
-  {id:"haiper",n:{zh:"Haiper",en:"Haiper"},d:{zh:"前 DeepMind 团队打造的 AI 视频生成工具",en:"AI video tool built by ex-DeepMind team"},cat:2,url:"https://www.haiper.ai",tags:[],aff:false},
+  // Writing - 2
+  {id:"xiezuo",n:{zh:"写作猫",en:"Xiezuo Cat"},d:{zh:"中文AI写作助手，支持广告文案、论文、小说、公文等场景",en:"Chinese AI writing for ads, essays, novels & official documents"},cat:2,url:"https://xiezuocat.com",tags:[],aff:false},
+  {id:"biling",n:{zh:"笔灵AI",en:"BilingAI"},d:{zh:"专注于AI写作，小红书文案、公众号文章一键生成",en:"AI writing specialized in Xiaohongshu posts & WeChat articles"},cat:2,url:"https://www.bilingai.com",tags:["new"],aff:false},
+  {id:"mida",n:{zh:"秘塔写作猫",en:"Mida Cat"},d:{zh:"AI写作+AI搜索，论文、报告、方案都能写",en:"AI writing + AI search for papers, reports & proposals"},cat:2,url:"https://www.midacat.com",tags:["free"],aff:false},
+  {id:"huoshan",n:{zh:"火山写作",en:"Huoshan Writer"},d:{zh:"字节跳动出品，智能润色、改写、翻译，写作效率翻倍",en:"ByteDance smart writing: polishing, rewriting, translation"},cat:2,url:"https://www.huoshanwriting.com",tags:["free"],aff:false},
 
-  // Writing - 3
-  {id:"jasper",n:{zh:"Jasper",en:"Jasper"},d:{zh:"专业AI营销文案写作工具，品牌调性定制，团队协作",en:"Pro AI marketing copywriter with brand voice customization & team collaboration"},cat:3,url:"https://www.jasper.ai",tags:[],aff:true},
-  {id:"grammarly",n:{zh:"Grammarly",en:"Grammarly"},d:{zh:"全球最流行的 AI 英文写作助手，语法纠错+风格优化",en:"World's most popular AI writing assistant for grammar & style"},cat:3,url:"https://www.grammarly.com",tags:[],aff:true},
-  {id:"notion-ai",n:{zh:"Notion AI",en:"Notion AI"},d:{zh:"集成在 Notion 中的 AI 写作工具，笔记、文档、项目管理全覆盖",en:"AI writing built into Notion, covering notes, docs & project management"},cat:3,url:"https://www.notion.so/product/ai",tags:[],aff:false},
-  {id:"xiezuo",n:{zh:"写作猫",en:"Xiezuo Cat"},d:{zh:"中文AI写作助手，支持文案、论文、小说等场景",en:"Chinese AI writing assistant for copywriting, essays & novels"},cat:3,url:"https://xiezuocat.com",tags:["free"],aff:false},
-  {id:"copy-ai",n:{zh:"Copy.ai",en:"Copy.ai"},d:{zh:"AI 营销文案生成器，支持销售邮件、社媒帖子等场景",en:"AI marketing copy generator for sales emails, social posts & more"},cat:3,url:"https://www.copy.ai",tags:[],aff:true},
-  {id:"writesonic",n:{zh:"Writesonic",en:"Writesonic"},d:{zh:"一站式 AI 内容创作平台，SEO文章、广告文案均可生成",en:"All-in-one AI content platform for SEO articles & ad copy"},cat:3,url:"https://writesonic.com",tags:[],aff:true},
+  // Video - 3
+  {id:"kling",n:{zh:"可灵AI",en:"Kling AI"},d:{zh:"快手出品AI视频生成，文生视频效果惊艳，免费使用",en:"Kuaishou AI video generation, stunning text-to-video, free"},cat:3,url:"https://kling.kuaishou.com",tags:["hot","free"],aff:false},
+  {id:"jianying",n:{zh:"剪映AI",en:"CapCut AI"},d:{zh:"抖音官方剪辑工具，AI自动字幕、配音、特效",en:"Douyin official editor with AI auto subtitles, dubbing & effects"},cat:3,url:"https://www.jianying.com",tags:["hot","free"],aff:false},
+  {id:"dujia",n:{zh:"度加剪辑",en:"Dujia Editor"},d:{zh:"百度出品，AI写稿+配音+剪辑全流程，自媒体必备",en:"Baidu AI video making: script writing, dubbing & editing"},cat:3,url:"https://dujia.baidu.com",tags:["free"],aff:false},
+  {id:"zhihui",n:{zh:"腾讯智影",en:"Tencent Zhiying"},d:{zh:"腾讯AI视频创作平台，数字人播报、视频生成",en:"Tencent AI video platform, digital human anchors & video gen"},cat:3,url:"https://zenvideo.qq.com",tags:["free"],aff:false},
+  {id:"jimeng-video",n:{zh:"即梦视频",en:"Jimeng Video"},d:{zh:"字节跳动AI视频，图生视频、文生视频都支持",en:"ByteDance AI video: image-to-video & text-to-video"},cat:3,url:"https://jimeng.jianying.com",tags:["free"],aff:false},
 
   // Coding - 4
-  {id:"cursor",n:{zh:"Cursor",en:"Cursor"},d:{zh:"AI 原生代码编辑器，深度集成 Claude 和 GPT，大幅提升开发效率",en:"AI-native code editor deeply integrated with Claude & GPT"},cat:4,url:"https://cursor.sh",tags:["hot"],aff:false},
-  {id:"github-copilot",n:{zh:"GitHub Copilot",en:"GitHub Copilot"},d:{zh:"微软/GitHub 出品的 AI 编程助手，深度支持 VS Code 和 JetBrains",en:"Microsoft's AI coding assistant for VS Code & JetBrains"},cat:4,url:"https://github.com/features/copilot",tags:[],aff:false},
-  {id:"windsurf",n:{zh:"Windsurf",en:"Windsurf"},d:{zh:"Codeium 出品的 AI IDE，上下文理解能力出色",en:"AI IDE by Codeium with excellent context understanding"},cat:4,url:"https://codeium.com/windsurf",tags:["hot"],aff:false},
-  {id:"v0",n:{zh:"v0 by Vercel",en:"v0 by Vercel"},d:{zh:"Vercel 出品，用自然语言一句话生成前端 UI 界面",en:"Generate frontend UI from natural language by Vercel"},cat:4,url:"https://v0.dev",tags:["hot","free"],aff:false},
-  {id:"bolt",n:{zh:"Bolt.new",en:"Bolt.new"},d:{zh:"StackBlitz 出品，在线即时生成并运行全栈应用",en:"Instant full-stack app generation & execution by StackBlitz"},cat:4,url:"https://bolt.new",tags:["hot"],aff:false},
-  {id:"lovable",n:{zh:"Lovable",en:"Lovable"},d:{zh:"AI 全栈应用生成器，一句话描述即可生成可部署的应用",en:"AI full-stack app builder, deployable apps from a single prompt"},cat:4,url:"https://lovable.dev",tags:["new"],aff:false},
-  {id:"replit",n:{zh:"Replit",en:"Replit"},d:{zh:"在线编程环境 + AI Agent，浏览器里完成开发全流程",en:"Online IDE + AI Agent, complete dev workflow in the browser"},cat:4,url:"https://replit.com",tags:[],aff:false},
-  {id:"codex-cli",n:{zh:"Codex CLI",en:"Codex CLI"},d:{zh:"OpenAI 出品的终端AI编程助手，命令行下全自动开发",en:"OpenAI's terminal AI coding agent for fully automated development"},cat:4,url:"https://github.com/openai/codex",tags:["new","free"],aff:false},
+  {id:"tongyi-lm",n:{zh:"通义灵码",en:"Tongyi Lingma"},d:{zh:"阿里云AI代码助手，集成在VS Code、JetBrains中，免费",en:"Alibaba AI coding assistant integrated in VS Code & JetBrains, free"},cat:4,url:"https://tongyi.aliyun.com/lingma",tags:["free"],aff:false},
+  {id:"marscode",n:{zh:"MarsCode",en:"MarsCode"},d:{zh:"字节跳动出品AI编程助手，免费且效果好",en:"ByteDance AI coding assistant, free with great results"},cat:4,url:"https://www.marscode.cn",tags:["new","free"],aff:false},
+  {id:"trae",n:{zh:"Trae AI",en:"Trae AI"},d:{zh:"字节跳动AI IDE，集成了Claude和GPT，写代码神器",en:"ByteDance AI IDE with Claude & GPT integration for coding"},cat:4,url:"https://www.trae.ai",tags:["new","free"],aff:false},
 
-  // Design - 5
-  {id:"canva",n:{zh:"Canva AI",en:"Canva AI"},d:{zh:"知名设计平台，AI功能可一键生成演示文稿、海报等",en:"Famous design platform with AI for presentations, posters & more"},cat:5,url:"https://www.canva.com",tags:["hot"],aff:false},
-  {id:"figma-ai",n:{zh:"Figma AI",en:"Figma AI"},d:{zh:"UI/UX 设计工具标杆，AI 功能可自动生成设计稿和组件",en:"UI/UX design standard with AI for auto-generating designs & components"},cat:5,url:"https://www.figma.com",tags:[],aff:false},
-  {id:"galileo-ai",n:{zh:"Galileo AI",en:"Galileo AI"},d:{zh:"从文字描述直接生成可交互的 UI 设计稿",en:"Generate interactive UI designs directly from text descriptions"},cat:5,url:"https://www.usegalileo.ai",tags:[],aff:false},
-  {id:"remove-bg",n:{zh:"Remove.bg",en:"Remove.bg"},d:{zh:"一键 AI 去除图片背景，5秒搞定",en:"One-click AI background removal, done in 5 seconds"},cat:5,url:"https://www.remove.bg",tags:["free"],aff:true},
-  {id:"clipdrop",n:{zh:"Clipdrop",en:"Clipdrop"},d:{zh:"AI 图像处理套件：放大、重光照、背景替换等",en:"AI image processing suite: upscale, relight, background replace"},cat:5,url:"https://clipdrop.co",tags:[],aff:false},
+  // Productivity - 5
+  {id:"feishu",n:{zh:"飞书智能伙伴",en:"Lark AI"},d:{zh:"飞书内置AI，会议纪要、文档总结、表格分析全搞定",en:"Lark built-in AI for meeting notes, doc summaries & sheet analysis"},cat:5,url:"https://www.feishu.cn",tags:["free"],aff:false},
+  {id:"dingtalk",n:{zh:"钉钉AI",en:"DingTalk AI"},d:{zh:"钉钉内置AI助手，工作汇报、会议纪要、审批自动化",en:"DingTalk AI for work reports, meeting notes & approval automation"},cat:5,url:"https://www.dingtalk.com",tags:["free"],aff:false},
+  {id:"tingjian",n:{zh:"讯飞听见",en:"iFlytek Hear"},d:{zh:"语音转文字神器，录音一键转会议纪要，准确率极高",en:"Voice-to-text tool, one-click meeting minutes, super accurate"},cat:5,url:"https://www.iflyrec.com",tags:["free"],aff:false},
+  {id:"mita-search",n:{zh:"秘塔AI搜索",en:"Mita AI Search"},d:{zh:"无广告AI搜索引擎，搜索直达答案，体验极好",en:"Ad-free AI search engine, direct answers, great experience"},cat:5,url:"https://www.mida.so",tags:["free"],aff:false},
+  {id:"tongyi-xl",n:{zh:"通义效率",en:"Tongyi Efficiency"},d:{zh:"阿里AI办公套件：实时转写、阅读助手、PPT生成",en:"Alibaba AI office suite: live transcription, reading assistant, PPT gen"},cat:5,url:"https://tongyi.aliyun.com/efficiency",tags:["free"],aff:false},
+  {id:"gamma",n:{zh:"Gamma",en:"Gamma"},d:{zh:"AI一键生成精美PPT和网页，国内可直接使用",en:"AI-generated beautiful PPTs & webpages, accessible in China"},cat:5,url:"https://gamma.app",tags:[],aff:false},
 
-  // Productivity - 6
-  {id:"gamma",n:{zh:"Gamma",en:"Gamma"},d:{zh:"AI 一键生成精美演示文稿、文档和网页",en:"AI-powered beautiful presentations, docs & webpages"},cat:6,url:"https://gamma.app",tags:["hot"],aff:false},
-  {id:"beautiful-ai",n:{zh:"Beautiful.ai",en:"Beautiful.ai"},d:{zh:"AI 自动排版的演示文稿工具，设计师级别的PPT效果",en:"AI auto-layout presentation tool with designer-quality slides"},cat:6,url:"https://www.beautiful.ai",tags:[],aff:false},
-  {id:"mem",n:{zh:"Mem",en:"Mem"},d:{zh:"AI 驱动的笔记应用，自动整理、关联你的所有知识",en:"AI-powered notes app that auto-organizes & connects your knowledge"},cat:6,url:"https://get.mem.ai",tags:[],aff:false},
-  {id:"taskade",n:{zh:"Taskade",en:"Taskade"},d:{zh:"AI 项目管理 + 思维导图 + 文档协作一体化工具",en:"AI project management + mind maps + docs collaboration in one"},cat:6,url:"https://www.taskade.com",tags:[],aff:false},
-  {id:"otter",n:{zh:"Otter.ai",en:"Otter.ai"},d:{zh:"AI 会议记录与实时转录工具，自动生成会议纪要和摘要",en:"AI meeting notes & real-time transcription with auto summaries"},cat:6,url:"https://otter.ai",tags:[],aff:false},
-  {id:"feishu",n:{zh:"飞书智能伙伴",en:"Lark AI"},d:{zh:"飞书内置AI助手，会议纪要、文档总结、表格分析全能",en:"Lark's built-in AI for meeting notes, doc summaries & sheet analysis"},cat:6,url:"https://www.feishu.cn",tags:["free"],aff:false},
+  // Audio & Music - 6
+  {id:"hailuo",n:{zh:"海螺AI",en:"Hailuo AI"},d:{zh:"MiniMax出品，AI语音合成+视频生成，中文语音很自然",en:"MiniMax multimodal AI, natural Chinese voice synthesis & video"},cat:6,url:"https://hailuoai.com",tags:["free"],aff:false},
+  {id:"mureka",n:{zh:"Mureka 音疯",en:"Mureka"},d:{zh:"AI音乐创作，输入歌词选风格就能生成完整歌曲",en:"AI music creation, generate full songs from lyrics & style"},cat:6,url:"https://www.mureka.cn",tags:["new"],aff:false},
+  {id:"elevenlabs",n:{zh:"ElevenLabs",en:"ElevenLabs"},d:{zh:"全球最逼真的AI语音合成与克隆，支持中文在内的多语种",en:"World's most realistic AI voice synthesis & cloning, supports Chinese"},cat:6,url:"https://try.elevenlabs.io/ncnfdm19n12d",tags:["hot"],aff:true},
 
-  // Audio & Music - 7
-  {id:"elevenlabs",n:{zh:"ElevenLabs",en:"ElevenLabs"},d:{zh:"最逼真的AI语音合成与克隆工具，支持多语种",en:"Most realistic AI voice synthesis & cloning, multilingual support"},cat:7,url:"https://try.elevenlabs.io/ncnfdm19n12d",tags:["hot"],aff:true},
-  {id:"suno",n:{zh:"Suno",en:"Suno"},d:{zh:"AI 音乐生成器，输入歌词和风格即可创作完整歌曲",en:"AI music generator, create full songs from lyrics & style prompts"},cat:7,url:"https://suno.com",tags:["hot"],aff:false},
-  {id:"udio",n:{zh:"Udio",en:"Udio"},d:{zh:"高品质 AI 音乐生成平台，音质出色",en:"High-quality AI music generation with excellent audio fidelity"},cat:7,url:"https://www.udio.com",tags:[],aff:false},
-  {id:"notebooklm",n:{zh:"NotebookLM",en:"NotebookLM"},d:{zh:"Google AI 笔记工具，可生成双人播客式的音频深度讨论",en:"Google's AI notebook that generates podcast-style audio discussions"},cat:7,url:"https://notebooklm.google.com",tags:["hot","free"],aff:false},
-  {id:"mureka",n:{zh:"Mureka",en:"Mureka"},d:{zh:"AI 音乐创作平台，支持多种风格和商用授权",en:"AI music creation platform with multiple styles & commercial license"},cat:7,url:"https://www.mureka.ai",tags:[],aff:false},
-  {id:"hailuo",n:{zh:"海螺 AI",en:"Hailuo AI"},d:{zh:"MiniMax 出品，AI语音合成、视频生成等多模态工具",en:"MiniMax multimodal AI: voice synthesis, video generation & more"},cat:7,url:"https://hailuoai.com",tags:["free"],aff:false},
-
-  // Marketing - 8
-  {id:"semrush",n:{zh:"Semrush",en:"Semrush"},d:{zh:"SEO/SEM 全栈营销工具，AI 驱动的关键词和竞品分析",en:"Full-stack SEO/SEM tool with AI-powered keyword & competitor analysis"},cat:8,url:"https://www.semrush.com",tags:[],aff:true},
-  {id:"zapier",n:{zh:"Zapier",en:"Zapier"},d:{zh:"AI 自动化工作流平台，连接 7000+ 应用无需编程",en:"AI automation platform connecting 7000+ apps, no coding needed"},cat:8,url:"https://zapier.com",tags:[],aff:false},
-  {id:"adcreative",n:{zh:"AdCreative.ai",en:"AdCreative.ai"},d:{zh:"AI 广告素材生成工具，快速产出高转化率的广告图",en:"AI ad creative generator for high-conversion ad visuals"},cat:8,url:"https://www.adcreative.ai",tags:[],aff:true},
-  {id:"hubspot",n:{zh:"HubSpot AI",en:"HubSpot AI"},d:{zh:"全球领先的CRM平台，内置AI营销、销售、客服功能",en:"World-leading CRM platform with AI marketing, sales & service"},cat:8,url:"https://www.hubspot.com",tags:[],aff:true},
-  {id:"jasper-art",n:{zh:"Jasper Art",en:"Jasper Art"},d:{zh:"Jasper 内置的 AI 图片生成，专为营销视觉设计",en:"Jasper's built-in AI image generator designed for marketing visuals"},cat:8,url:"https://www.jasper.ai/art",tags:[],aff:true},
-
-  // Other - 9
-  {id:"perplexity",n:{zh:"Perplexity",en:"Perplexity"},d:{zh:"AI 搜索引擎，实时联网检索并提供带引用的答案",en:"AI search engine with real-time web search and cited answers"},cat:9,url:"https://www.perplexity.ai",tags:["hot"],aff:false},
-  {id:"you",n:{zh:"You.com",en:"You.com"},d:{zh:"注重隐私的 AI 搜索引擎，支持多种 AI 模型切换",en:"Privacy-focused AI search engine with multiple AI model options"},cat:9,url:"https://you.com",tags:[],aff:false},
-  {id:"meta-ai",n:{zh:"Meta AI",en:"Meta AI"},d:{zh:"集成在 Facebook/Instagram/WhatsApp 中的免费 AI 助手",en:"Free AI assistant integrated in Facebook, Instagram & WhatsApp"},cat:9,url:"https://www.meta.ai",tags:["free"],aff:false},
-  {id:"civitai",n:{zh:"Civitai",en:"Civitai"},d:{zh:"AI 绘画模型分享社区，海量 Stable Diffusion 模型免费下载",en:"AI art model sharing community, massive free Stable Diffusion models"},cat:9,url:"https://civitai.com",tags:["free"],aff:false},
-  {id:"huggingface",n:{zh:"Hugging Face",en:"Hugging Face"},d:{zh:"全球最大 AI 模型开源社区，数十万模型和数据集",en:"World's largest open-source AI community, 100K+ models & datasets"},cat:9,url:"https://huggingface.co",tags:["free"],aff:false},
-  {id:"promptbase",n:{zh:"PromptBase",en:"PromptBase"},d:{zh:"AI 提示词交易市场，买卖 Midjourney/DALL·E 等工具的提示词",en:"Marketplace for buying & selling AI prompts for Midjourney, DALL·E etc."},cat:9,url:"https://promptbase.com",tags:[],aff:false},
-  {id:"tlk-io",n:{zh:"Trae",en:"Trae"},d:{zh:"字节跳动出品的 AI IDE，免费集成 Claude 和 GPT 模型",en:"ByteDance AI IDE with free Claude & GPT integration"},cat:9,url:"https://www.trae.ai",tags:["new","free"],aff:false},
+  // Fun & Creative - 7
+  {id:"lianka",n:{zh:"脸咖",en:"Lianka"},d:{zh:"AI换脸、照片变卡通、表情包生成，好玩到停不下来",en:"AI face swap, photo to cartoon, emoji generation, super fun"},cat:7,url:"https://www.lianka.com",tags:["new"],aff:false},
+  {id:"xingtu",n:{zh:"醒图",en:"Xingtu"},d:{zh:"字节出品AI修图神器，一键美颜、风格化、创意特效",en:"ByteDance AI photo editor: beauty, stylize, creative effects"},cat:7,url:"https://www.xingtu.cn",tags:["free"],aff:false},
+  {id:"wujie",n:{zh:"无界AI",en:"Wujie AI"},d:{zh:"AI绘画社区+工具，模型超多，二次元、写实风格都有",en:"AI art community & tool, tons of models, anime & realistic styles"},cat:7,url:"https://www.wujieai.com",tags:["free"],aff:false},
+  {id:"douqu",n:{zh:"逗拍",en:"Douqu"},d:{zh:"AI趣味视频，各种爆款特效模板，一键生成搞笑视频",en:"AI fun video maker, viral effect templates, one-click funny videos"},cat:7,url:"https://www.douqu.com",tags:[],aff:false},
+  {id:"qingyan",n:{zh:"轻颜相机",en:"Qingyan Camera"},d:{zh:"AI美颜相机，智能识别妆容风格，拍照直接出大片",en:"AI beauty camera, smart makeup recognition, pro-level selfies"},cat:7,url:"https://www.qingyan.com",tags:[],aff:false},
+  {id:"remove-bg",n:{zh:"改图鸭",en:"Gaitue"},d:{zh:"在线AI抠图、图片编辑、格式转换，免费好用",en:"Free online AI background removal, image editing & format conversion"},cat:7,url:"https://www.gaitue.com",tags:["free"],aff:false},
 ];
-
 const CATS = [
-  {id:0,n:{zh:"聊天对话",en:"Chat"},icon:"💬"},
-  {id:1,n:{zh:"图像生成",en:"Image"},icon:"🎨"},
-  {id:2,n:{zh:"视频生成",en:"Video"},icon:"🎬"},
-  {id:3,n:{zh:"写作助手",en:"Writing"},icon:"✍️"},
-  {id:4,n:{zh:"编程开发",en:"Coding"},icon:"💻"},
-  {id:5,n:{zh:"设计创意",en:"Design"},icon:"🖌️"},
-  {id:6,n:{zh:"办公效率",en:"Productivity"},icon:"📊"},
-  {id:7,n:{zh:"音频音乐",en:"Audio"},icon:"🎵"},
-  {id:8,n:{zh:"营销增长",en:"Marketing"},icon:"📈"},
-  {id:9,n:{zh:"更多工具",en:"More"},icon:"🔧"},
+  {id:0,n:{zh:"🔥 热门AI",en:"🔥 Popular AI"},icon:"🔥"},
+  {id:1,n:{zh:"🎨 绘画设计",en:"🎨 Art & Design"},icon:"🎨"},
+  {id:2,n:{zh:"✍️ 写作文案",en:"✍️ Writing"},icon:"✍️"},
+  {id:3,n:{zh:"🎬 视频创作",en:"🎬 Video Making"},icon:"🎬"},
+  {id:4,n:{zh:"💻 编程开发",en:"💻 Coding"},icon:"💻"},
+  {id:5,n:{zh:"📊 办公效率",en:"📊 Productivity"},icon:"📊"},
+  {id:6,n:{zh:"🎵 音频音乐",en:"🎵 Audio & Music"},icon:"🎵"},
+  {id:7,n:{zh:"🎮 趣味工具",en:"🎮 Fun & Creative"},icon:"🎮"},
 ];
 
 let lang = 'zh';
@@ -357,7 +325,7 @@ function render(){
 function selectCat(id){activeCat=id;render();}
 function trackClick(id){console.log('click:',id);}
 
-function showSubmitForm(){showToast(lang==='zh'?'提交功能开发中，请发送邮件至 contact@aitoolnav.com':'Submit feature coming soon, email contact@aitoolnav.com');}
+function showSubmitForm(){showToast(lang==='zh'?'提交功能开发中，请发送邮件至 gdg.ai.tools@gmail.com':'Submit feature coming soon, email gdg.ai.tools@gmail.com');}
 
 function showToast(msg){
   const t=document.getElementById('toast');
